@@ -1,7 +1,7 @@
-function [PaperOrder,Q,Qhist]=EEM(E,V,varargin)
-% [PaperOrder,Q,Qhist]=EEM(E,V)  allocates reviewers to papers based
+function [PaperOrder,Q,Qhist]=ConvEM(E,V,varargin)
+% [PaperOrder,Q,Qhist]=ConvEM(E,V)  allocates reviewers to papers based
 % based on the Expertise Matrix E and Veto Matrix V. The allocation is
-% performed by the EEM introduced in Section 5 in [1].
+% performed by the ConvEM introduced in Section 6 in [1].
 %
 % The inputs are: 
 %   - E. Expertise matrix where E(i,j) quantifies the expertise of 
@@ -28,19 +28,19 @@ function [PaperOrder,Q,Qhist]=EEM(E,V,varargin)
 %       his/her own publications a word which is also present in the paper
 %       they have been assigned to revie.
 %
-%   [PaperOrder,Q,Qhist]=EEM(E,V,Npaper) assigns Npapers to each 
+%   [PaperOrder,Q,Qhist]=ConvEM(E,V,Npaper) assigns Npapers to each 
 %   reviewer. 
 %
 %   Note: in the paper [1]. the assignment solution is given in terms of a
 %   binary Matrix "A". PaperOrder(i) is the column index in row i where a 1 
 %   is located. In other words: A(i,PaperOrder(i))=1.
 %
-%  v3.0  June 2022. Miguel Castano Arranz, castano.arranz@gmail.com
+%  v3.1  October 2022. Miguel Castano Arranz, castano.arranz@gmail.com
 %                 Division of Operation and Maintenance, 
 %                 Lulea University of Technology, Sweden 
 %
-%  [1]: "Automatic assignment of reviewers in peer reviewed conferences",
-% subbmitted to Epert Systems (September 2020)
+%  [1]: "Convex Optimization for Reviewer Assignment in Conference",
+% subbmitted to Neurocomputing 
 
 
 % Cost matrix for minimization obtained by combining negative E and adding
@@ -58,7 +58,7 @@ elseif nargin==3
 end
 
 
-% loop to resolve EEM (see Section 4.1 in {1]) as many times as
+% loop to resolve ConvEM (see Section 4.1 in {1]) as many times as
 % the number of papers assigned to each reviewer. The veto matrix is 
 % changed between iterations in order to prevent papers to be assigned 
 % twice to the same reviewer (see Section 6.2 in [1]). 
