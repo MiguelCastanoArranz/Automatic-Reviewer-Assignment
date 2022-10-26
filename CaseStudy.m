@@ -3,16 +3,16 @@
 % This code is divided in the following sections: 
 %   1.- Reviewer Information Retrieval (IR). Obtain the data needed to 
 %  resolve the assignment. (See Section 4 in [1])
-%   2.- Calling to the Efficient Expertise Matching (EEM) which assigns 
+%   2.- Calling to the Convex Expertise Matching (ConvEM) which assigns 
 %  reviewers to papers. (See Section 6 in [1]).
 %   3.- Calling to the function which reports the results in a text file
 %
-%  v3.0  June 2022. Miguel Castano Arranz, castano.arranz@gmail.com
+%  v3.1  October 2022. Miguel Castano Arranz, castano.arranz@gmail.com
 %                 Division of Operation and Maintenance, 
 %                 Lulea University of Technology, Sweden 
 %
-% [1]: "Automatic assignment of reviewers in peer reviewed conferences",
-% subbmitted to Neurocomputing (June 2022)
+% [1]: "Convex Optimization for Reviewer Assignment in Conference",
+% subbmitted to Neurocomputing 
 
 
 %% 1.- Reviewer Information Retrieval (IR) 
@@ -53,15 +53,15 @@ K=P'*W;
 E=P*K;
 
 %% 3.- Runs an optimization scheme to assign reviewers
-% Call to the function which runs EEM
-[PaperOrder,Q,Qhist]=EEM(E,V);
+% Call to the function which runs ConvEM
+[PaperOrder,Q,Qhist]=ConvEM(E,V);
 % Alternatively you can use the greedy Expertise Matching (GEM) as baseline
 %[PaperOrder,Q,Qhist]=GEM(E,V);
 
 % If you want to assign more than one paper to each reviewer, you can call
-% the EEM function with an extra input argument, e.g.: 
-%[PaperOrder,Q,Qhist]=EEM(E,V,2); % to assign 2 papers per reviewer
-%[PaperOrder,Q,Qhist]=EEM(E,V,3); % to assign 3 papers per reviewer
+% the ConvEM function with an extra input argument, e.g.: 
+%[PaperOrder,Q,Qhist]=ConvEM(E,V,2); % to assign 2 papers per reviewer
+%[PaperOrder,Q,Qhist]=ConvEM(E,V,3); % to assign 3 papers per reviewer
 
 
 
